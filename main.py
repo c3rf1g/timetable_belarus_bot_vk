@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+
 import vk_api
 import requests
 from bs4 import BeautifulSoup
@@ -9,8 +9,6 @@ from importlib import reload
 import sys, os
 
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 token = "1c089eedd463a37112c8a3911e68fb22f371c829ca4225ef31b9318858b732e5e0bc01a1fe5b591b2fecb"
 vk_session = vk_api.VkApi(token=token)
