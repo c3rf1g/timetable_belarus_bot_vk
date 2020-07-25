@@ -169,27 +169,30 @@ def select_direction(link, event):
     newList = []
 
     print(event.text)
-    if int(event.text) == 1 or int(event.text) == 2:
-        if int(event.text) == 1:
-            newList = List[0:int(len(List) / 2) - 1]
+    try:
+        if int(event.text) == 1 or int(event.text) == 2:
+            if int(event.text) == 1:
+                newList = List[0:int(len(List) / 2) - 1]
 
-        elif int(event.text) == 2:
-            newList = List[int(len(List) / 2):int(len(List)) - 1]
+            elif int(event.text) == 2:
+                newList = List[int(len(List) / 2):int(len(List)) - 1]
 
-        print(newList)
+            print(newList)
 
-        user_list[event.user_id]['stop'] = newList
-        user_list[event.user_id]['depth'] += 1
+            user_list[event.user_id]['stop'] = newList
+            user_list[event.user_id]['depth'] += 1
 
 
-        msg = "Выберите остановку:\n"
-        number_item = 1
-        for item in newList:
-            msg += str(number_item) + ". " + item['name'] + "\n"
-            number_item += 1
-        vk_session.method('messages.send', {'user_id': event.user_id, 'message': msg, 'random_id': 0})
+            msg = "Выберите остановку:\n"
+            number_item = 1
+            for item in newList:
+                msg += str(number_item) + ". " + item['name'] + "\n"
+                number_item += 1
+            vk_session.method('messages.send', {'user_id': event.user_id, 'message': msg, 'random_id': 0})
 
-    else:
+        else:
+            print("Error")
+    except:
         print("Error")
 
 
