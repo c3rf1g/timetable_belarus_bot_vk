@@ -167,29 +167,31 @@ def nums_list_to_message_format(src_list):
 def select_direction(link, event):
     List = get_stop(link, event)
     newList = []
-    try:
-        if int(event.text) == 1 or int(event.text) == 2:
-            if int(event.text) == 1:
-                newList = List[0:int(len(List) / 2) - 1]
 
-            elif int(event.text) == 2:
-                newList = List[0:int(len(List) / 2) - 1: -1]
+    print(event.text)
+    if int(event.text) == 1 or int(event.text) == 2:
+        if int(event.text) == 1:
+            newList = List[0:int(len(List) / 2) - 1]
 
-            user_list[event.user_id]['stop'] = newList
-            user_list[event.user_id]['depth'] += 1
+        elif int(event.text) == 2:
+            newList = List[int(len(List) / 2):int(len(List)) - 1]
+
+        print(newList)
+
+        user_list[event.user_id]['stop'] = newList
+        user_list[event.user_id]['depth'] += 1
 
 
-            msg = "Выберите остановку:\n"
-            number_item = 1
-            for item in newList:
-                msg += str(number_item) + ". " + item['name'] + "\n"
-                number_item += 1
-            vk_session.method('messages.send', {'user_id': event.user_id, 'message': msg, 'random_id': 0})
+        msg = "Выберите остановку:\n"
+        number_item = 1
+        for item in newList:
+            msg += str(number_item) + ". " + item['name'] + "\n"
+            number_item += 1
+        vk_session.method('messages.send', {'user_id': event.user_id, 'message': msg, 'random_id': 0})
 
-        else:
-            print("Error")
-    except:
+    else:
         print("Error")
+
 
 def get_stop(link, event):
     html = get_html(link)
@@ -202,8 +204,6 @@ def get_stop(link, event):
         'name': item.find('a').get_text(strip=True),
         'link': item.find('a').get('href')
         })
-
-
 
     return stop_List
 
