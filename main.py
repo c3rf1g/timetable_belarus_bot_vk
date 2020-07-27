@@ -120,9 +120,6 @@ def multiplicity_upper(multiplicity):
 
     List = []
     ind = 0
-
-
-
     for index in range(len(basic_transport)):
         if basic_transport[index] in multiplicity:
             List.append(basic_transport[index])
