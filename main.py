@@ -62,7 +62,7 @@ transport_decode = {
 
 temp_stop_dict = []
 
-basic_transport = {u'Автобус', u'Троллейбус', u'Трамвай', u'Метро'}
+basic_transport = [u'Автобус', u'Троллейбус', u'Трамвай', u'Метро']
 
 def get_html(url, params = None):
     data = requests.get(url, params = params)
@@ -117,18 +117,15 @@ def multiplicity_upper(multiplicity):
             temp_str = multiplicity[index][0:slash_index + 1] + symb + multiplicity[index][slash_index + 2:]
             multiplicity[index] = temp_str
 
-    multiplicity = set(multiplicity)
-    multiplicity = multiplicity & basic_transport
-    multiplicity = set_to_list(multiplicity)
 
     List = []
     ind = 0
 
-    mult = set_to_list(basic_transport)
+
 
     for index in range(len(basic_transport)):
-        if mult[index] in multiplicity:
-            List.append(mult[index])
+        if basic_transport[index] in multiplicity:
+            List.append(basic_transport[index])
     print(List)
     return List
 
